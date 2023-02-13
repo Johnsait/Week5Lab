@@ -18,18 +18,33 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HomeServlet extends HttpServlet {
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String username = (String) request.getSession().getAttribute("username");
 
+        if (username == null) {
+            response.sendRedirect("login");
+            return;
+        }
+
+        String action = request.getParameter("action");
+
+        if (action != null && action.equals("logout")) {
+            request.getSession().invalidate();
+            response.sendRedirect("login");
+            return;
+        }
+
+        getServletContext().getRequestDispatcher("/WEB-INF/home.jsp")
+                .forward(request, response);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+       getServletContext().getRequestDispatcher("/WEB-INF/home.jsp")
+               .forward(request, response);
     }
 
 }
