@@ -12,20 +12,11 @@ package models;
 public class AccountService {
 
 
-    public AccountService(){
-    }
-
-    /**
-     *
-     * @param username
-     * @param password
-     * @return
-     */
     public  User login(String username, String password) {
         if ("abe".equals(username) && "password".equals(password)) {
-            return new User(username, password);
+            return new User(username, null);
         } else if ("barb".equals(username) && "password".equals(password)) {
-            return new User(username, password);
+            return new User(username, null);
         } else {
             return null;
         }
